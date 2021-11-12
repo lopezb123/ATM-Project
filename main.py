@@ -2,18 +2,27 @@ from tkinter import messagebox
 from tkinter import *
 import tkinter as tk
 
+# global variables defined here
 username = ''
 password = ''
 email = ''
 balance = ''
 enterBalance = ''
-userInformation = {0: {'username' : 'jith', 'password' : 'luc', 'email' : 'jith@gmail.com', 'balance' : '100000000'}}
 
+# dictionary userInformation initialized here
+userInformation = {0: {'username': 'jith', 'password': 'luc', 'email': 'jith@gmail.com', 'balance': '100000000'}}
+
+
+# create account screen function will switch login screen to create account screen
 def createAccountScreen(loginScreen, createAccountScreen):
     loginScreen.forget()
     createAccountScreen.pack(fill='both', expand=1)
 
-def createAccount(username, password, email, count, balance, loginScreen, createAccountScreen, createUsernameText, createPasswordText, createEmailText, initialDepositText):
+
+# create account function will use the user input on create account screen to store account information within the
+# dictionary for later recall
+def createAccount(username, password, email, count, balance, loginScreen, createAccountScreen, createUsernameText,
+                  createPasswordText, createEmailText, initialDepositText):
     balance = balance
     count = count + 1
 
@@ -45,6 +54,8 @@ def createAccount(username, password, email, count, balance, loginScreen, create
     createEmailText.insert(0, 'Email Address')
     initialDepositText.insert(0, '$0')
 
+# login function will use the user data entered in login screen to ensure a valid login was entered, and if so,
+# the login screen will be changed to the welcome screen
 def login(username, password, loginScreen, welcomeScreen):
     tempUsername = username
     tempPassword = password
@@ -54,14 +65,15 @@ def login(username, password, loginScreen, welcomeScreen):
             welcomeScreen.pack(fill='both', expand=1)
 
             usernameLabel = Label(welcomeScreen, text=tempUsername, font=('Helvatical bold', 15)).place(relx=0.95,
-                                                                                                              rely=0.05, anchor=E)
-            emailLabel = Label(welcomeScreen, text=userInformation[i]['email'], font=('Helvatical bold', 15)).place(relx=0.95,
-                                                                                                        rely=0.1, anchor = E)
+                                                                                                        rely=0.05,
+                                                                                                        anchor=E)
+            emailLabel = Label(welcomeScreen, text=userInformation[i]['email'], font=('Helvatical bold', 15)).place(
+                relx=0.95,
+                rely=0.1, anchor=E)
 
-            balanceLabel = Label(welcomeScreen, text='$' + userInformation[i]['balance'], font=('Helvatical bold', 30), fg = 'green').place(relx=0.5,
-                                                                                                        rely=0.5, anchor = CENTER)
+            balanceLabel = Label(welcomeScreen, text='$' + userInformation[i]['balance'], font=('Helvatical bold', 30),
+                                 fg='green').place(relx=0.5,
+                                                   rely=0.5, anchor=CENTER)
             return
 
     messagebox.showerror('Error', 'Login Invalid')
-
-
